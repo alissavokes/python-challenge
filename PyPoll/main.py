@@ -39,9 +39,19 @@ with open(csvpath) as election_data_csv:
     print("-------------------------")
     print(f"Winner: {election_winner}")
 
-#output_file = os.path.join("Analysis", "election_results.txt")
-#with open(output_file, "w") as datafile:
-    #datafile.write("Election Results\n")
-    #datafile.write("-------------------------\n")
-    #datafile.write(f"Total Votes: {total_votes}\n")
-    #datafile.write("-------------------------\n")
+output_file = os.path.join("Analysis", "election_results.txt")
+with open(output_file, "w") as datafile:
+    datafile.write("Election Results\n")
+    datafile.write("-------------------------\n")
+    datafile.write(f"Total Votes: {total_votes}\n")
+    datafile.write("-------------------------\n")
+    prior_votes = 0
+    for candidate in candidate_dict:
+        votes = len(candidate_dict[candidate])
+        percentage_votes = "{:.3f}".format(votes / total_votes * 100)
+        datafile.write(f"{candidate}: {percentage_votes}% ({votes})\n")
+        if votes > prior_votes:
+            election_winner = candidate
+        prior_votes = votes
+    datafile.write("-------------------------\n")
+    datafile.write(f"Winner: {election_winner}\n")
