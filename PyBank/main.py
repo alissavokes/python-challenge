@@ -22,7 +22,7 @@ with open(csvpath) as budget_data_csv:
         change = profit_loss - prior_month_PL
         #adding change to list to keep track
         changes_list.append(change)
-
+        #attaching each change to corresponding month
         changes_by_month[change] = row[0]
         #updating prior_month_PL to current row for next iteration
         prior_month_PL = int(row[1])
